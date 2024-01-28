@@ -1,12 +1,13 @@
 import User from "../modals/user.modal.js"
 import bcryptjs from "bcryptjs"
+import { errorHandler } from "../utils/error.js"
 
-const signup = async(req, res) => {
+const signup = async(req, res, next) => {
     try{
         const { username, email, password } = req.body
 
         if(!username || !email || !password || username === "" || email === "" || password === ""){
-            return res.status(400).json({message:"All feilds are required"})
+            next(errorHandler(400, "All feilds are required"))
         }
 
         const hashPassword = bcryptjs.hash(password, 10)
@@ -20,7 +21,7 @@ const signup = async(req, res) => {
         res.json("Signup successfull")
     }
     catch(err){
-        res.status(500).json({message:err.message})
+        next(err)
     }
 }
 
