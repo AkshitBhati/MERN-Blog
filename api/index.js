@@ -13,7 +13,7 @@ connectDb()
 app.use(express.json())
 
 app.use("/api",UserRoutes)
-app.use("/api",authRoutes)
+app.use("/api/auth",authRoutes)
 
 //middleware
 app.use((err, req, res, next) => {

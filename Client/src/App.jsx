@@ -1,4 +1,4 @@
-import React, { lazy } from 'react'
+import React, { Suspense, lazy } from 'react'
 import { Routes, Route } from "react-router-dom"
 //pages
 import Home from './Pages/Home'
@@ -20,13 +20,16 @@ const App = () => {
   return (
    <>
    <Header />
+    <Suspense fallback={<div>Loading...</div>}>
    <Routes>
+
     <Route path='/' element={<HomePage />}/>
     <Route path='/about' element={<AboutPage />}/>
     <Route path='/sign-in' element={<SigninPage />}/>
     <Route path='/sign-up' element={<SignupPage />}/>
     <Route path='/dashboard' element={<DashboardPage />}/>
    </Routes>
+    </Suspense>
    </>
   )
 }
