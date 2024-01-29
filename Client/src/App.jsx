@@ -7,6 +7,7 @@ import Signin from './Pages/Signin'
 import Signup from './Pages/Signup'
 import Dashboard from './Pages/Dashboard'
 import Header from './Components/Header'
+import FooterCom from './Components/Footer'
 
 //implementing lazy loading in the app
 const HomePage = lazy(() => import("./Pages/Home"))
@@ -29,6 +30,7 @@ const App = () => {
     <Route path='/sign-up' element={<SignupPage />}/>
     <Route path='/dashboard' element={<DashboardPage />}/>
    </Routes>
+   <FooterCom />
     </Suspense>
    </>
   )
