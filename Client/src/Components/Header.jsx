@@ -1,14 +1,17 @@
 import React from 'react'
 import { Avatar, Button, Dropdown, Navbar, TextInput } from 'flowbite-react'
 import { AiOutlineSearch } from "react-icons/ai"
-import { FaMoon } from "react-icons/fa"
+import { FaMoon ,FaSun } from "react-icons/fa"
 import { Link, useLocation } from 'react-router-dom'
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import { toogleTheme } from '../redux/theme/ThemeSlice'
+
 const Header = () => {
     //for active link
     const path = useLocation().pathname
-
+    const dispatch = useDispatch()
     const { currentUser } = useSelector((state) => state.user)
+    const { theme } = useSelector((state) => state.theme)
 
   return (
     <Navbar className='border-b-2'>
@@ -26,7 +29,9 @@ const Header = () => {
         </form>
         <Button className='w-12 h-10 lg:hidden' color='gray' pill><AiOutlineSearch /></Button>
         <div className='flex gap-2 md:order-2'>
-            <Button className='w-12 h-10 hidden sm:inline' color='gray' pill><FaMoon /></Button>
+            <Button className='w-12 h-10 hidden sm:inline' color='gray' pill onClick={() => dispatch(toogleTheme())}>
+                {theme === 'light' ? <FaMoon /> : <FaSun />}
+                </Button>
             { currentUser ? (
                 <Dropdown arrowIcon={false} inline label={<Avatar alt='user' img={currentUser.profilePicture} rounded />}>
                     <Dropdown.Header>
