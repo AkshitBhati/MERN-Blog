@@ -12,6 +12,8 @@ const DashboardProfile = () => {
   const [imageFileUrl, setImageFileUrl] = useState(null);
   const [imageFileUplaodingProgress, setImageFileUploadingProgress] = useState(null)
   const [imageFileUploadError, setImageFileUploadError] = useState(null)
+  const [formData, setFormData] = useState({})
+
 
   const filePickerRef = useRef()
 
@@ -48,6 +50,7 @@ const DashboardProfile = () => {
       () => {
         getDownloadURL(uplaodTask.snapshot.ref).then((downloadUrl) => {
           setImageFileUrl(downloadUrl)
+          setFormData({ ...formData, profilePicture:downloadUrl })
         })
       }
     )
