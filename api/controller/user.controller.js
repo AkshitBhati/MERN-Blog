@@ -66,4 +66,13 @@ const updateUser = async (req, res, next) => {
       next(err)
     }
   }
-export { test, updateUser, deleteUser }
+
+  const signout = async(req, res, next) => {
+    try{
+      res.clearCookie('access-token').status(200).json('User has been signed out')
+    }
+    catch(err){
+      next(err)
+    }
+  }
+export { test, updateUser, deleteUser, signout }

@@ -64,7 +64,7 @@ const google = async(req, res, next) => {
         if(user){
             const token = jwt.sign({ id:user._id }, process.env.jwtsecret )
             const { hashPassword, ...rest } = user._doc
-            res.status(200).cookie('access-toke', token, {
+            res.status(200).cookie('access-token', token, {
                 httpOnly:true,
             }).json(rest)
         }
