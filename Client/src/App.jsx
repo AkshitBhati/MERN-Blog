@@ -9,6 +9,8 @@ import Dashboard from './Pages/Dashboard'
 import Header from './Components/Header'
 import FooterCom from './Components/Footer'
 import PrivateRoute from './Components/PrivateRoute'
+import OnlyAdminPrivateRoute from './Components/OnlyAdminPrivateRoute'
+import CreatePost from './Pages/CreatePost'
 
 //implementing lazy loading in the app
 const HomePage = lazy(() => import("./Pages/Home"))
@@ -31,6 +33,9 @@ const App = () => {
     <Route path='/sign-up' element={<SignupPage />}/>
     <Route element={<PrivateRoute />}>
     <Route path='/dashboard' element={<DashboardPage />}/>
+    </Route>
+    <Route element={<OnlyAdminPrivateRoute />}>
+      <Route path='/create-post' element={<CreatePost />}/>
     </Route>
    </Routes>
    <FooterCom />
