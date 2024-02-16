@@ -33,9 +33,9 @@ const App = () => {
     <Route path='/sign-up' element={<SignupPage />}/>
     <Route element={<PrivateRoute />}>
     <Route path='/dashboard' element={<DashboardPage />}/>
+      <Route path='/create-post' element={<CreatePost />}/>
     </Route>
     <Route element={<OnlyAdminPrivateRoute />}>
-      <Route path='/create-post' element={<CreatePost />}/>
     </Route>
    </Routes>
    <FooterCom />
