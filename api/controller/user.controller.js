@@ -75,4 +75,42 @@ const updateUser = async (req, res, next) => {
       next(err)
     }
   }
-export { test, updateUser, deleteUser, signout }
+  const getUsers = async(req, res, next) => {
+    try{
+      const startIndex = parseInt(req.query.startIndex) 
+      const limit = parseInt(req.query.limit) || 9
+      const sortDirection = req.query.sort === 'asc' ? 1 : -1
+
+      const users = await User.find()
+      .sort({ createdAt:sortDirection })
+      .skip(startIndex)
+      .limit(limit)
+
+      const usersWithoutPassword = users.map((user) => {
+        const { hashPassword, ...rest } = user._doc
+        return rest
+      })
+      const totalUsers = await User.countDocuments()
+
+      const now = new Date()
+
+      const OneMonthAgo = new Date(
+        now.getFullYear(),
+        now.getMonth() -1,
+        now.getDate()
+      )
+      const lastMonthUser = await User.countDocuments({
+        createdAt:{$gte:OneMonthAgo}
+      })
+
+      res.status(200).json({
+        user:usersWithoutPassword,
+        totalUsers,
+        lastMonthUser
+      })
+    }
+    catch(err){
+      next(err)
+    }
+  }
+export { test, updateUser, deleteUser, signout, getUsers }
