@@ -84,6 +84,33 @@ const CommentSection = ({ postId }) => {
       console.error(err);
     }
   };
+
+  const handleEdit = async (comment, editedContent) => {
+    setComments(
+      comments.map((c) =>
+        c._id === comment._id ? { ...c, content: editedContent } : c
+      )
+    );
+  };
+
+  const handleDelete = async (commentId) => {
+    setShowModal(false);
+    try {
+      if (!currentUser) {
+        navigate('/sign-in');
+        return;
+      }
+      const res = await fetch(`/api/comment/deleteComment/${commentId}`, {
+        method: 'DELETE',
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setComments(comments.filter((comment) => comment._id !== commentId));
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   
   return (
     <div className='max-w-2xl mx-auto w-full p-3'>
@@ -142,7 +169,7 @@ const CommentSection = ({ postId }) => {
           </div>
         </div>
         {comments.map((comment) => (
-          <Comment key={comment._id} comment={comment} onLike={handleLike}/>
+          <Comment key={comment._id} comment={comment} onLike={handleLike} onEdit={handleEdit} />
         ))}
         </>
 
