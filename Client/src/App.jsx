@@ -13,6 +13,7 @@ import OnlyAdminPrivateRoute from './Components/OnlyAdminPrivateRoute'
 import CreatePost from './Pages/CreatePost'
 import UpdatePost from './Pages/UpdatePost'
 import PostPage from './Pages/PostPage'
+import Search from './Pages/Search'
 
 //implementing lazy loading in the app
 const HomePage = lazy(() => import("./Pages/Home"))
@@ -33,6 +34,7 @@ const App = () => {
     <Route path='/about' element={<AboutPage />}/>
     <Route path='/sign-in' element={<SigninPage />}/>
     <Route path='/sign-up' element={<SignupPage />}/>
+    <Route path='/search' element={<Search />}/>
     <Route path='/post/:postSlug' element={<PostPage />}/>
     <Route element={<PrivateRoute />}>
     <Route path='/dashboard' element={<DashboardPage />}/>
