@@ -7,6 +7,7 @@ import {
   HiOutlineUserGroup,
   HiAnnotation,
 } from "react-icons/hi";
+import { MdDashboardCustomize } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signoutSuccess } from "../redux/user/UserSlice";
@@ -95,7 +96,7 @@ const DashboardSidebar = () => {
               <Link to={"/dashboard?tab=dash"}>
                 <Sidebar.Item
                   active={tab === "dash"}
-                  icon={HiAnnotation}
+                  icon={MdDashboardCustomize}
                   as="div"
                 >
                   Dashboard
