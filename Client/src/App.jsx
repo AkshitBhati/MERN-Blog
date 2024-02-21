@@ -1,19 +1,11 @@
 import React, { Suspense, lazy } from 'react'
 import { Routes, Route } from "react-router-dom"
 //pages
-import Home from './Pages/Home'
-import About from './Pages/About'
-import Signin from './Pages/Signin'
-import Signup from './Pages/Signup'
-import Dashboard from './Pages/Dashboard'
+
 import Header from './Components/Header'
 import FooterCom from './Components/Footer'
 import PrivateRoute from './Components/PrivateRoute'
 import OnlyAdminPrivateRoute from './Components/OnlyAdminPrivateRoute'
-import CreatePost from './Pages/CreatePost'
-import UpdatePost from './Pages/UpdatePost'
-import PostPage from './Pages/PostPage'
-import Search from './Pages/Search'
 
 //implementing lazy loading in the app
 const HomePage = lazy(() => import("./Pages/Home"))
@@ -21,7 +13,10 @@ const AboutPage = lazy(() => import("./Pages/About"))
 const SigninPage = lazy(() => import("./Pages/Signin"))
 const SignupPage = lazy(() => import("./Pages/Signup"))
 const DashboardPage = lazy(() => import("./Pages/Dashboard"))
-
+const CreatePost = lazy(() => import("./Pages/CreatePost"))
+const UpdatePost = lazy(() => import("./Pages/UpdatePost"))
+const PostPage = lazy(() => import("./Pages/PostPage"))
+const Search = lazy(() => import('./Pages/Search'))
 
 const App = () => {
   return (
