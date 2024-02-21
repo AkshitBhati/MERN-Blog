@@ -44,7 +44,12 @@ const Signin = () => {
     }
   };
   
-
+  const handleLoginAsAdmin = () => {
+    setFormData({
+      email:"admin@akshit.com",
+      password:"akshit"
+    })
+  }
   return (
    <div className='min-h-screen mt-20'>
     <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5">
@@ -67,6 +72,7 @@ const Signin = () => {
             placeholder='Email'
             id='email'
             onChange={handleChange}
+            value={formData.email}
           />
           </div> 
 
@@ -77,6 +83,7 @@ const Signin = () => {
             placeholder='Password'
             id='password'
             onChange={handleChange}
+            value={formData.password}
           />
           </div> 
           <Button gradientDuoTone="purpleToPink" type='submit' disabled={loading}>
@@ -85,9 +92,17 @@ const Signin = () => {
               <Spinner size="sm"/>
               <span className='pl-3'>Loading ...</span>
               </>
-            ) : "Sign Up"}
+            ) : "Sign In"}
           </Button>
-          <OAuth />
+          <Button gradientDuoTone="purpleToPink" disabled={loading} onClick={handleLoginAsAdmin}>
+            {loading ? (
+              <>
+              <Spinner size="sm"/>
+              <span className='pl-3'>Loading ...</span>
+              </>
+            ) : "Login as admin"}
+          </Button>
+            <OAuth />
         </form>
         <div className="flex gap-2 text-sm mt-5">
           <span>New Here?</span>
