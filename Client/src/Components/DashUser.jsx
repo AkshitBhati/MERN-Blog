@@ -15,7 +15,6 @@ export default function DashUsers() {
       try {
         const res = await fetch(`/api/getusers`);
         const data = await res.json();
-        console.log(data)
         if (res.ok) {
           setUsers(data.user);
           if (data.users.length < 9) {
@@ -38,7 +37,8 @@ export default function DashUsers() {
       const data = await res.json();
       if (res.ok) {
         setUsers((prev) => [...prev, ...data.users]);
-        if (data.users.length < 9) {
+        console.log(data)
+        if (data.users.length <= 9) {
           setShowMore(false);
         }
       }
@@ -63,7 +63,6 @@ export default function DashUsers() {
         console.log(error.message);
     }
   };
-
   return (
     <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
      {currentUser.isAdmin && users && users.length > 0 ? (
@@ -118,6 +117,7 @@ export default function DashUsers() {
             <button
               onClick={handleShowMore}
               className='w-full text-teal-500 self-center text-sm py-7'
+              
             >
               Show more
             </button>
