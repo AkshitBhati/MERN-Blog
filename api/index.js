@@ -6,10 +6,13 @@ import UserRoutes from "./routes/user.route.js"
 import authRoutes from "./routes/auth.route.js"
 import postRoutes from "./routes/post.route.js"
 import commetRoutes from "./routes/comment.route.js"
+import path from "path"
 
 const app = express()
 
 dotenv.config()
+
+const __dirname = path.resolve()
 
 connectDb()
 
@@ -20,6 +23,12 @@ app.use("/api",UserRoutes)
 app.use("/api/auth",authRoutes)
 app.use('/api/post', postRoutes)
 app.use('/api/comment', commetRoutes)
+
+app.use(express.static(path.join(__dirname, '/client/dist')))
+
+app.get('*', (req,res) => {
+    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'))
+})
 
 //middleware
 app.use((err, req, res, next) => {
