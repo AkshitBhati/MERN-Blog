@@ -46,7 +46,7 @@ const DashboardSidebar = () => {
             <Sidebar.Item
               active={tab === "profile"}
               icon={HiUser}
-              label={"User"}
+              label={currentUser.isAdmin === true ? "Admin" : "User"}
               labelColor="dark"
               as="div"
             >
