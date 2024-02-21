@@ -69,9 +69,9 @@ const Header = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             />
         </form>
-        <Button className='w-12 h-10 lg:hidden' color='gray' pill><AiOutlineSearch /></Button>
+        <Button className='w-12 h-10 hidden ' color='gray' pill><AiOutlineSearch /></Button>
         <div className='flex gap-2 md:order-2'>
-            <Button className='w-12 h-10 hidden sm:inline' color='gray' pill onClick={() => dispatch(toogleTheme())}>
+            <Button className='w-12 h-10  sm:inline' color='gray' pill onClick={() => dispatch(toogleTheme())}>
                 {theme === 'light' ? <FaMoon /> : <FaSun />}
                 </Button>
             { currentUser ? (
@@ -101,6 +101,9 @@ const Header = () => {
                 </Navbar.Link>
                 <Navbar.Link active={path === "/create-post"} as={"div"}> 
                 <Link to="/create-post">Create-Post</Link>
+                </Navbar.Link>
+                <Navbar.Link className='lg:hidden' active={path === "/search"} as={"div"}> 
+                <Link to="/search">Search</Link>
                 </Navbar.Link>
             </Navbar.Collapse>
     </Navbar>
