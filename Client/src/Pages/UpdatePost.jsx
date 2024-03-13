@@ -21,30 +21,36 @@ export default function UpdatePost() {
   const [formData, setFormData] = useState({});
   const [publishError, setPublishError] = useState(null);
   const { postId } = useParams();
-
   const navigate = useNavigate();
-    const { currentUser } = useSelector((state) => state.user);
+  const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
-    try {
-      const fetchPost = async () => {
+    const fetchPost = async () => {
+      try {
         const res = await fetch(`/api/post/getposts?postId=${postId}`);
         const data = await res.json();
+
         if (!res.ok) {
           console.log(data.message);
           setPublishError(data.message);
           return;
         }
-        if (res.ok) {
-          setPublishError(null);
-          setFormData(data.posts[0]);
-        }
-      };
 
-      fetchPost();
-    } catch (error) {
-      console.log(error.message);
-    }
+        if (res.ok && data.posts && data.posts.length > 0) {
+          setPublishError(null);
+          console.log(data.posts[0]);
+          setFormData(data.posts[0]);
+        } else {
+          // Handle the case where the post data is not returned or is empty
+          console.log('Post data not found');
+          setPublishError('Post data not found');
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    fetchPost();
   }, [postId]);
 
   const handleUpdloadImage = async () => {
@@ -85,6 +91,12 @@ export default function UpdatePost() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!formData._id || !currentUser._id) {
+      setPublishError('Post ID or User ID is missing');
+      return;
+    }
+
     try {
       const res = await fetch(`/api/post/updatepost/${formData._id}/${currentUser._id}`, {
         method: 'PUT',
@@ -94,19 +106,23 @@ export default function UpdatePost() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
+
       if (!res.ok) {
         setPublishError(data.message);
         return;
       }
 
-      if (res.ok) {
-        setPublishError(null);
-        navigate(`/post/${data.slug}`);
-      }
+      setPublishError(null);
+      navigate(`/post/${data.slug}`);
     } catch (error) {
       setPublishError('Something went wrong');
     }
   };
+
+  // Only render the form when formData._id is available
+  if (!formData._id) {
+    return <div>Loading...</div>; // You can replace this with a loading indicator or message
+  }
   return (
     <div className='p-3 max-w-3xl mx-auto min-h-screen'>
       <h1 className='text-center text-3xl my-7 font-semibold'>Update post</h1>
