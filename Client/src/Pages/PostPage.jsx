@@ -6,6 +6,7 @@ import PostCard from '../Components/PostCard';
 
 export default function PostPage() {
   const { postSlug } = useParams();
+  
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [post, setPost] = useState(null);
@@ -14,6 +15,7 @@ export default function PostPage() {
   useEffect(() => {
     const fetchPost = async () => {
       try {
+        
         setLoading(true);
         const res = await fetch(`/api/post/getposts?slug=${postSlug}`);
         const data = await res.json();
@@ -84,13 +86,13 @@ export default function PostPage() {
         className='p-3 max-w-2xl mx-auto w-full post-content'
         dangerouslySetInnerHTML={{ __html: post && post.content }}
       ></div>
-      <CommentSection postId={post._id} />
+      <CommentSection postId={post && post._id} />
 
       <div className='flex flex-col justify-center items-center mb-5'>
         <h1 className='text-xl mt-5'>Recent articles</h1>
         <div className='flex flex-wrap gap-5 mt-5 justify-center '>
           {recentPosts &&
-            recentPosts.map((post) => <PostCard key={post._id} post={post} />)}
+            recentPosts.map((post) => <PostCard key={post && post._id} post={post} />)}
         </div>
       </div>
     </main>

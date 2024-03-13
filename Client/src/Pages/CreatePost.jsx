@@ -66,6 +66,7 @@ const CreatePost = () => {
     });
 
     const data = await res.json();
+    
 
     if (!res.ok) {
       setPublishError(data.message || 'Publish failed');
@@ -76,14 +77,28 @@ const CreatePost = () => {
       setPublishError(data.message || 'Publish failed');
       return;
     }
+    const postSlug = data.savedPost.slug;
+    console.log(data.savedPost.slug
+      )
     setPublishError(null);
-    navigate(`/post/${data.slug}`)
+    navigate(`/post/${postSlug}`)
 
   } catch (err) {
     setPublishError('Something went wrong');
   }
 };
 
+const modules = {
+  toolbar: {
+    container: [
+      [{ header: [1, 2, false] }],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      ['link', 'image', 'code-block'], // Add 'code-block' tool
+      ['clean'],
+    ],
+  },
+};
 
   return (
     <div className="p-3 max-w-3xl mx-auto min-h-screen">
@@ -145,6 +160,7 @@ const CreatePost = () => {
           placeholder="Write Something..."
           className="h-72 mb-12"
           required
+          modules={modules}
           onChange={(value) => setFormData({...formData, content:value})}
         />
         <Button type="submit" gradientDuoTone={"purpleToPink"}>
