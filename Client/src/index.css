@@ -39,3 +39,6 @@ body{
 .dark .post-content a{
     color: rgb(9, 140, 228);
 }
+.post-content p span{
+    color:"#fff";
+}
