@@ -2,43 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    height: 100vh;
+body {
+  height: 100vh;
 }
 
-.ql-editor{
-    font-size: 1.05rem;
-}
-.ql-syntax{
-    background-color: rgb(30, 29, 73);
-    color: #fff;
-    padding: 5px;
-}
-.post-content p{
-    margin-bottom: 0.5rem;
-}
-.post-content h1{
-    font-size:1.5rem ;
-    font-weight: 600;
-    font-family: sans-serif;
-    margin: 1.5rem 0;
-}
-.post-content h2{
-    font-size:1.4rem ;
-    font-family: sans-serif;
-    margin: 1.5rem 0;
+.ql-editor {
+  font-size: 1.05rem;
 }
 
-.post-content a{
-    color: rgb(73,149,199);
-    text-decoration: none;
+.post-content p {
+  margin-bottom: 0.5rem;
 }
-.post-content a:hover{
-    text-decoration: underline;
+
+.post-content h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: sans-serif;
+  margin: 1.5rem 0;
 }
-.dark .post-content a{
-    color: rgb(9, 140, 228);
+
+.post-content h2 {
+  font-size: 1.4rem;
+  font-family: sans-serif;
+  margin: 1.5rem 0;
 }
-.post-content p span{
-    color:"#fff";
+
+.post-content a {
+  color: rgb(73, 149, 199);
+  text-decoration: none;
+}
+
+.post-content a:hover {
+  text-decoration: underline;
+}
+
+.dark .post-content a {
+  color: red;
 }

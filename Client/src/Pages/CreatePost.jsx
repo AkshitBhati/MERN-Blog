@@ -70,21 +70,24 @@ const CreatePost = () => {
 
     if (!res.ok) {
       setPublishError(data.message || 'Publish failed');
+      console.log("Here is errorr")
       return;
     }
 
     if (data.success === false) {
       setPublishError(data.message || 'Publish failed');
+      console.log("Here is errorr in false")
       return;
     }
-    const postSlug = data.savedPost.slug;
-    console.log(data.savedPost.slug
-      )
+    
+    console.log(data.slug)
+
     setPublishError(null);
-    navigate(`/post/${postSlug}`)
+    navigate(`/post/${data.slug}`)
 
   } catch (err) {
     setPublishError('Something went wrong');
+    console.log(err.message)
   }
 };
 
