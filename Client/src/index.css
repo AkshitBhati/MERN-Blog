@@ -28,7 +28,9 @@ body{
     font-family: sans-serif;
     margin: 1.5rem 0;
 }
-    
+p span{
+    color:"#fff"
+}
 .post-content a{
     color: rgb(73,149,199);
     text-decoration: none;
