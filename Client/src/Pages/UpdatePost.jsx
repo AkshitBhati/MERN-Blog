@@ -118,11 +118,22 @@ export default function UpdatePost() {
       setPublishError('Something went wrong');
     }
   };
-
-  // Only render the form when formData._id is available
+  
   if (!formData._id) {
-    return <div>Loading...</div>; // You can replace this with a loading indicator or message
+    return <div>Loading...</div>; 
   }
+
+  const modules = {
+  toolbar: {
+    container: [
+      [{ header: [1, 2, false] }],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      ['link', 'image', 'code-block'], // Add 'code-block' tool
+      ['clean'],
+    ],
+  },
+};
   return (
     <div className='p-3 max-w-3xl mx-auto min-h-screen'>
       <h1 className='text-center text-3xl my-7 font-semibold'>Update post</h1>
@@ -191,6 +202,7 @@ export default function UpdatePost() {
           placeholder='Write something...'
           className='h-72 mb-12'
           required
+          modules={modules}
           onChange={(value) => {
             setFormData({ ...formData, content: value });
           }}
