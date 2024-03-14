@@ -9,11 +9,7 @@ body{
 .ql-editor{
     font-size: 1.05rem;
 }
-.ql-syntax{
-    background-color: rgb(30, 29, 73);
-    color: #fff;
-    padding: 5px;
-}
+
 .post-content p{
     margin-bottom: 0.5rem;
 }
